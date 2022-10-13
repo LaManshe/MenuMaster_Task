@@ -1,10 +1,10 @@
 ﻿namespace MenuMaster
 {
-    public class Menu
+    public class Menu : IMenu
     {
         private readonly List<Page> _pages;
         private readonly List<Dish> _dishCollection;
-        private readonly int _countDishesOnPage;
+        private readonly int        _countDishesOnPage;
         /// <summary>
         /// Конструктор класса Menu
         /// </summary>
@@ -18,7 +18,7 @@
             if (dishCollection.Exists(x => x == String.Empty)) throw new Exception("В переданном списке существует пустой элемент");
             if (countDishesOnPage < 1)                         throw new Exception("Количество элементов на странице должно быть больше 1");
 
-            _dishCollection = dishCollection.Select(x => new Dish() { Name = x }).ToList();
+            _dishCollection    = dishCollection.Select(x => new Dish() { Name = x }).ToList();
             _countDishesOnPage = countDishesOnPage;
 
             _pages = FillPages();
@@ -31,12 +31,12 @@
         /// <exception cref="Exception"></exception>
         public Menu(List<Dish> dishCollection, int countDishesOnPage)
         {
-            if (dishCollection == null) throw new Exception("Список блюд был null");
-            if (dishCollection.Count < 1) throw new Exception("Переданный список пуст");
+            if (dishCollection == null)                             throw new Exception("Список блюд был null");
+            if (dishCollection.Count < 1)                           throw new Exception("Переданный список пуст");
             if (dishCollection.Exists(x => x.Name == String.Empty)) throw new Exception("В переданном списке существует пустой элемент");
-            if (countDishesOnPage < 1) throw new Exception("Количество элементов на странице должно быть больше 1");
+            if (countDishesOnPage < 1)                              throw new Exception("Количество элементов на странице должно быть больше 1");
 
-            _dishCollection = dishCollection;
+            _dishCollection    = dishCollection;
             _countDishesOnPage = countDishesOnPage;
 
             _pages = FillPages();
@@ -57,14 +57,16 @@
         /// <param name="page">Порядковый номер страницы, начиная с 1</param>
         /// <returns>Целое число, количество блюд на странице int page</returns>
         /// <exception cref="Exception"></exception>
-        public int GetCountDishesOnPage(int page) => page <= GetCountPages() ? _pages[page - 1].CountDishes : throw new Exception($"Страницы {page} не существует");
+        public int GetCountDishesOnPage(int page) => page <= GetCountPages() ? _pages[page - 1].CountDishes 
+            : throw new Exception($"Страницы {page} не существует");
         /// <summary>
         /// Получить блюда на странице
         /// </summary>
         /// <param name="page">Порядковый номер страницы, начиная с 1</param>
         /// <returns>Список string названий блюд</returns>
         /// <exception cref="Exception"></exception>
-        public List<string> GetDishesOnPage(int page) => page <= GetCountPages() ? _pages[page - 1].Dishes.Select(x => x.ToString()).ToList() : throw new Exception($"Страницы {page} не существует");
+        public List<string> GetDishesOnPage(int page) => page <= GetCountPages() ? _pages[page - 1].Dishes.Select(x => x.ToString()).ToList() 
+            : throw new Exception($"Страницы {page} не существует");
         /// <summary>
         /// Получить первое блюдо на каждой странице
         /// </summary>
@@ -76,7 +78,8 @@
         /// <param name="page">Порядковый номер страницы, начиная с 1</param>
         /// <returns>Возвращает string имя страницы</returns>
         /// <exception cref="Exception"></exception>
-        public string GetFirstDish(int page) => page <= GetCountPages() ? _pages[page - 1].First.ToString() : throw new Exception($"Страницы {page} не существует");
+        public string GetFirstDish(int page) => page <= GetCountPages() ? _pages[page - 1].First.ToString() 
+            : throw new Exception($"Страницы {page} не существует");
 
         private List<Page> FillPages()
         {
