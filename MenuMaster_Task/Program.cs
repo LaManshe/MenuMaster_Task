@@ -8,7 +8,7 @@ internal class Program
 
         Console.WriteLine($"Общее количество блюд: {menu.GetCountDishes()}");
         Console.WriteLine($"Количество страниц: {menu.GetCountPages()}");
-        Console.WriteLine($"Количество блюд на 2 странице: {menu.GetCountDishesOnPage(1)}");
+        Console.WriteLine($"Количество блюд на 2 странице: {menu.GetCountDishesOnPage(2)}");
         Console.WriteLine($"Блюда 1 странице:");
         foreach (var dish in menu.GetDishesOnPage(1))
         {
