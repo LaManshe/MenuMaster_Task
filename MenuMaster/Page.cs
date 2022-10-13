@@ -10,15 +10,6 @@
                 return Dishes.Count;
             }
         }
-        
-        public List<string> DishesStrings
-        {
-            get
-            {
-                return Dishes.Select(x => x.ToString()).ToList();
-            }
-        }
-
         public Dish First
         {
             get
